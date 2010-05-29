@@ -8,7 +8,8 @@ import java.util.ArrayList;
 
 import game.Airplane;
 import game.Craft;
-import game.Items.ItemCollector;
+import game.Collectors.ItemCollector;
+import game.Weapons.EnemyBullet1;
 import game.Weapons.EnemyMissile;
 import game.Weapons.Missile;
 
@@ -19,7 +20,6 @@ public abstract class Enemy extends Airplane{
 	protected boolean visible;
 	
 	protected final int CRAFT_SIZE = 20;
-	protected boolean hasAttacked = true;
 	
 	protected final int ATTACK_DELAY = 200;
 	public Enemy()
@@ -43,13 +43,14 @@ public abstract class Enemy extends Airplane{
     	int y = (int)getLocation().getY();
     	
 		getMissiles().add(new EnemyMissile(x - CRAFT_SIZE, y + CRAFT_SIZE/2 + 20));
-		hasAttacked = false;
 	}
 
 	@Override
 	public void fireRedBullet() {
-		// TODO Auto-generated method stub
-		
+		int x = (int)getLocation().getX();
+    	int y = (int)getLocation().getY();
+    	
+    	getMissiles().add(new EnemyBullet1(x - CRAFT_SIZE, y + CRAFT_SIZE/2 + 20));
 	}
 
 
@@ -62,9 +63,14 @@ public abstract class Enemy extends Airplane{
 	}
 	
 	public void move() {
+		
 		int x = (int)getLocation().getX();
     	int y = (int)getLocation().getY();
     	
+    	getLocation().translate(-1, 0);
+    	if( x <= -40)
+    		setVisible(false);
+    	/*
     	if(x >= 700)
 			setMoved();
     	
@@ -79,12 +85,13 @@ public abstract class Enemy extends Airplane{
 		
 		if( movedX ){
 			getLocation().translate(getDX(), 0);
-		}
+			*/
+	}
 		
 	
-	}
 	
-	private void setMoved()
+	
+	public void setMoved()
 	{
 		if(movedX == false)
 			movedX = true;
@@ -137,8 +144,11 @@ public abstract class Enemy extends Airplane{
 	public void attack(){
 		ArrayList<Missile> missiles = getMissiles();
 
-		if(missiles.size()<1)
-			fireMissle();
+		int x = (int)getLocation().getX();
+		if(x >= 300)
+			if(missiles.size()<1)
+				fireMissle();
+		
 		/*
 		Thread t;
 		
