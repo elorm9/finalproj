@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 
-public class Craft extends Airplane implements Entity{
+public class Craft extends Airplane {
 
     private String ref = "Images/Planes/plane2.png";
     private final int CRAFT_SIZE = 20;
@@ -28,12 +28,11 @@ public class Craft extends Airplane implements Entity{
     
     public Craft(int x, int y) {
     	super(x,y);
-        ImageIcon ii = new ImageIcon(this.getClass().getResource(ref));
-        image = ii.getImage();
-        
-        width = image.getWidth(null);
-        height = image.getHeight(null);
-        HP = 100;
+    	
+    	setImage(ref);
+        setWidth(getImage().getWidth(null) -30 );
+        setHeight(getImage().getHeight(null));
+        setHP(100);
         
         numMissiles = 5;
         numBullets = 200;
@@ -41,65 +40,69 @@ public class Craft extends Airplane implements Entity{
 
 
     public void move() {
-		x += dx;
-    	y += dy;
+    	getLocation().translate(getDX(), getDY());
 	}
     
     public void fireRedBullet() {
+    	int x = (int)getLocation().getX();
+    	int y = (int)getLocation().getY();
+    	
     	if(numBullets > 0){
-    		missiles.add(new RedBullet(getX() + CRAFT_SIZE, getY() + CRAFT_SIZE/2 + 20));
+    		getMissiles().add(new RedBullet(x + CRAFT_SIZE, y + CRAFT_SIZE/2 + 20));
     		numBullets--;
     	}
     	System.out.println(numBullets);
     }
     
     public void fireBlueBullet(){
+    	int x = (int)getLocation().getX();
+    	int y = (int)getLocation().getY();
+    	
     	if(numBullets > 0){
-    		missiles.add(new BlueBullet(getX() + CRAFT_SIZE, getY() + CRAFT_SIZE/2 + 20));	
+    		getMissiles().add(new BlueBullet(x + CRAFT_SIZE, y + CRAFT_SIZE/2 + 20));	
     		numBullets--;
     	}
     }
     
     public void fireLaser(){
+    	int x = (int)getLocation().getX();
+    	int y = (int)getLocation().getY();
+    	
     	if(numBullets > 0){
-    		missiles.add(new GreenLaser(getX() + CRAFT_SIZE, getY() + CRAFT_SIZE/2 + 20));	
+    		getMissiles().add(new GreenLaser(x + CRAFT_SIZE, y + CRAFT_SIZE/2 + 20));	
     		numBullets--;
     	}
     }
     
     public void fireMissle(){
+    	int x = (int)getLocation().getX();
+    	int y = (int)getLocation().getY();
+    	
     	if(numMissiles > 0){
-    		missiles.add(new RedMissle(getX() + CRAFT_SIZE, getY() + CRAFT_SIZE/2 + 20));
+    		getMissiles().add(new RedMissle(x + CRAFT_SIZE, y + CRAFT_SIZE/2 + 20));
     		numMissiles--;
     	}
-    	
-    	System.out.println(numMissiles);
+
     }
-
-
-    public ArrayList<Missile> getMissiles() {
-        return missiles;
-    }
-
-    
+ 
     public void keyPressed(KeyEvent e) {
 
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_LEFT) {
-            dx = -1;
+            setDX(-1);
         }
 
         if (key == KeyEvent.VK_RIGHT) {
-            dx = 1;
+        	setDX(1);
         }
 
         if (key == KeyEvent.VK_UP) {
-            dy = -1;
+            setDY(-1);
         }
 
         if (key == KeyEvent.VK_DOWN) {
-            dy = 1;
+            setDY(1);
         }
     }
 
@@ -107,19 +110,19 @@ public class Craft extends Airplane implements Entity{
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_LEFT) {
-            dx = 0;
+            setDX(0);
         }
 
         if (key == KeyEvent.VK_RIGHT) {
-            dx = 0;
+          setDX(0);
         }
 
         if (key == KeyEvent.VK_UP) {
-            dy = 0;
+            setDY(0);
         }
 
         if (key == KeyEvent.VK_DOWN) {
-            dy = 0;
+            setDY(0);
         }
         
         if (key == KeyEvent.VK_A) {
@@ -137,22 +140,19 @@ public class Craft extends Airplane implements Entity{
 
     }
 
-    public Rectangle getBound(){
-   	 return new Rectangle(x, y, image.getWidth(null)-68, image.getHeight(null));
-   }
-
-    
     public void drawHP(Graphics hp)
     {
     	Color green = new Color(0,255,0);
     	hp.setColor(green);
     	
-    	hp.fillRect(20, 330, HP, 15);
+    	hp.fillRect(20, 330, getHP(), 15);
     }
 	
     
 	public void missileAction(ArrayList<Enemy> enemies) 
 	{
+		ArrayList<Missile> missiles = getMissiles();
+		
 		//for each missle in the missle arraylist
 	    for (int i = 0; i < missiles.size(); i++) {
 	    	
@@ -176,6 +176,8 @@ public class Craft extends Airplane implements Entity{
 	        else missiles.remove(i);
 	    }
 	}
+
+
 
 	
 

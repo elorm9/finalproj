@@ -3,78 +3,52 @@ package game.Weapons;
 
 import game.Entity;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Rectangle;
 
-import javax.swing.ImageIcon;
 
-public abstract class Missile implements Entity{
+public abstract class Missile extends Entity{
 
-    private int x, y;
-    protected boolean visible;
-    protected Image image;
-    
-    protected int width;
-    protected int height;
+	private final int BOARD_WIDTH = 800;
+	
+    private int damage;
+    private int speed;
     
     public Missile()
     {
-    	this.x = 0;
-    	this.y = 0;
-    	
-    	image = null;
-    	
-    	visible = false;
+    	super();
     }
     
     public Missile(int x, int y) {
-
-        ImageIcon ii = new ImageIcon(this.getClass().getResource("Bullets/missile.png"));
-        image = ii.getImage();
+    
+    	setImage("Bullets/missile.png");
+    	
+        setVisible(true);
+        setLocation(x,y);
         
-        
-        visible = true;
-        this.x = x;
-        this.y = y;
-        
+        damage = 2;
+    }
+    
+    public void move() {
+    	getLocation().translate(speed, 0);
+        if (getLocation().getX() > BOARD_WIDTH)
+           setVisible(false);
     }
     
     
-	
-    
-    public Image getImage() {
-        return image;
-    }
-
-    public int getX() {	
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public boolean isVisible() {
-        return visible;
-    }
-    
-    public void setSpeed(int missileSpeed)
+    public void setSpeed(int s)
     {
-    	x += missileSpeed;
+    	speed = s;
     }
-
-	public void setVisible(boolean a) {
-		visible = a;
-		
-	}
-	
-	public Rectangle getBound(){
-		return new Rectangle(x, y, width, height);
-	}
-    public abstract void move();
     
-    public abstract int getDamage();
+    public int getSpeed(){
+    	return speed;
+    }
+    
+    public int getDamage(){
+    	return damage;
+    }
+    
+    public void setDamage(int d){
+    	damage = d;
+    }
     
 }
