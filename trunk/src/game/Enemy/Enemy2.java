@@ -16,6 +16,7 @@ public class Enemy2 extends Enemy{
     	super(x,y);
     	
     	setImage(ref);
+        setVisible(true);
         
     	setHP(20);
         setWidth(getImage().getWidth(null)-20);

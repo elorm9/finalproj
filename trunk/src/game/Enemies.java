@@ -2,6 +2,7 @@ package game;
 
 
 import game.Enemy.*;
+import game.Items.ItemCollector;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -131,11 +132,18 @@ public class Enemies {
 			a.drawHP(g);
 	}
 	
-	public void removeEnemies(){
+	public void removeEnemies(ItemCollector a){
 		for(int i = 0; i < enemies.size(); i++)
 		{
-			if(enemies.get(i).getHP() <= 0)
+			if(enemies.get(i).getHP() <= 0){
+				enemies.get(i).dropItem(a);
 				enemies.remove(i);
+			}
+			else
+				if(enemies.get(i).isVisible() == false){
+					enemies.get(i).dropItem(a);
+					enemies.remove(i);
+				}
 		}
 	}
 

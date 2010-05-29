@@ -24,8 +24,10 @@ public abstract class Items extends Entity{
 	
 
 	public void collidesWith(Craft a){
-		if( getBound().intersects(a.getBound()))
+		if( getBound().intersects(a.getBound())){
 			effect(a);
+			setVisible(false);
+		}
 	}
 	
 	public abstract void effect(Craft a);

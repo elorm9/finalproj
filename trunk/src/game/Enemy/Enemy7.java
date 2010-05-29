@@ -22,6 +22,8 @@ public class Enemy7 extends Enemy{
     	setImage(ref);
         
     	setHP(20);
+    	setVisible(true);
+    	
         setWidth(getImage().getWidth(null)-20);
         setHeight(getImage().getHeight(null));
         setDX(1);

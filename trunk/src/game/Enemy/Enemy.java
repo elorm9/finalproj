@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import game.Airplane;
 import game.Craft;
+import game.Items.ItemCollector;
 import game.Weapons.EnemyMissile;
 import game.Weapons.Missile;
 
@@ -52,6 +53,14 @@ public abstract class Enemy extends Airplane{
 	}
 
 
+	public void dropItem(ItemCollector a){
+		int chance = 0;
+		
+		chance = (int)(Math.random()*100);
+		if(chance <= 40)
+			a.addRandomItem(this);
+	}
+	
 	public void move() {
 		int x = (int)getLocation().getX();
     	int y = (int)getLocation().getY();

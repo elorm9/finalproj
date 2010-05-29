@@ -1,13 +1,9 @@
 package game.Enemy;
 
-import javax.swing.ImageIcon;
+
 
 public class Enemy5 extends Enemy{
 	private String ref = "Planes/Enemy5.png";
-    
-    private int dx = 1;
-    private int dy = 1;
-    
     
     public Enemy5()
     {
@@ -18,6 +14,7 @@ public class Enemy5 extends Enemy{
     	super(x,y);
     	
     	setImage(ref);
+        setVisible(true);
         
     	setHP(20);
         setWidth(getImage().getWidth(null)-20);
