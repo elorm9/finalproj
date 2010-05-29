@@ -1,6 +1,7 @@
 package game;
 
 import game.Enemy.*;
+import game.Items.ItemCollector;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -28,10 +29,9 @@ public class Board extends JPanel implements ActionListener{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Timer timer;
-    private Craft craft;
-    
-
-    
+   
+	private Craft craft;
+    private ItemCollector drops;
     private Enemies opponents;
     
     private Image background;
@@ -55,6 +55,7 @@ public class Board extends JPanel implements ActionListener{
         //create a user plane
         craft = new Craft(40,60);
         opponents = new Enemies();
+        drops = new ItemCollector();
         
         //create a timer
         timer = new Timer(3, this);
@@ -75,10 +76,13 @@ public class Board extends JPanel implements ActionListener{
         craft.drawHP(g);
         craft.drawMissiles(g2d, this);
         
+        
         opponents.drawEnemies(g2d, this);
         opponents.drawHP(g);
         opponents.drawEnemyMissiles(g2d, this);
 
+        drops.drawItems(g2d, this);
+        
         Toolkit.getDefaultToolkit().sync();
         g.dispose();
     }
@@ -91,11 +95,13 @@ public class Board extends JPanel implements ActionListener{
         craft.move();
         craft.missileAction(opponents.getEnemies());
         
-        opponents.removeEnemies();
+        opponents.removeEnemies(drops);
         opponents.move();
-        
         opponents.missileAction(craft);
         
+        drops.removeItems();
+        drops.moveItems();
+        drops.checkCollisions(craft);
         //update the current image
         repaint();  
     }

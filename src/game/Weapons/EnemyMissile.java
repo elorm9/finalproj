@@ -5,7 +5,7 @@ public class EnemyMissile extends Missile{
 
 private String ref = "EnemyBullets/missileFlipped.png";
 	
-    private final int BOARD_WIDTH = -1;
+    private final int BOARD_WIDTH = -100;
     
     
 
@@ -22,7 +22,7 @@ private String ref = "EnemyBullets/missileFlipped.png";
     	setWidth(getImage().getWidth(null)-23);
         setHeight(getImage().getHeight(null));
         
-        setSpeed(3);
+        setSpeed(1);
         setDamage(5);
         
         setVisible(true);

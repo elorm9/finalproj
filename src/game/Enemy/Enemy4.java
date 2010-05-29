@@ -1,20 +1,13 @@
 package game.Enemy;
 
-import game.Weapons.EnemyMissile;
-import game.Weapons.Missile;
 
-import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
 
 public class Enemy4 extends Enemy{
 	private String ref = "Planes/Enemy4.png";
-    private ArrayList <Missile> missiles = new ArrayList<Missile>();
     
-    private final int CRAFT_SIZE = 20;
+
     
-    
-    
+
     public Enemy4()
     {
     	super();
@@ -24,6 +17,7 @@ public class Enemy4 extends Enemy{
     	super(x,y);
     	
     	setImage(ref);
+        setVisible(true);
         
         setWidth(getImage().getWidth(null)-20);
         setHeight(getImage().getHeight(null));
