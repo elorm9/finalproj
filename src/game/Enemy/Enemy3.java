@@ -3,6 +3,8 @@ package game.Enemy;
 public class Enemy3 extends Enemy{
 	private String ref = "Planes/Enemy3.png";
     
+	private boolean moveUp = true;
+	
     public Enemy3()
     {
     	super();
@@ -23,6 +25,37 @@ public class Enemy3 extends Enemy{
         setDY(1);
     }
     
+	public void move() {
+		
+		int x = (int)getLocation().getX();
+    	int y = (int)getLocation().getY();
+    	
+    	
+    	//getLocation().translate(-1, 1);
+    	if(moveUp == true){
+    		getLocation().translate(-1, -1);
+    		
+    		if(y <= 50)
+    			moveUp = false;
+    	}
+    	
+    	else
+    	{
+    		getLocation().translate(-1, 1);
+    		if(y >= 300)
+    			moveUp = true;
+    	}
+
+    	
+    	
+    	if(!movedX)
+    		
+    	
+    	if( x <= -40)
+    		setVisible(false);
+
+	}
+		
 
 
 }

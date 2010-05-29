@@ -1,8 +1,12 @@
-package game.Items;
+package game.Collectors;
 
-import game.Airplane;
 import game.Craft;
 import game.Enemy.Enemy;
+import game.Items.Item_BlueBullet;
+import game.Items.Item_GreenLaser;
+import game.Items.Item_HP;
+import game.Items.Item_Missile;
+import game.Items.Items;
 
 import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
@@ -11,6 +15,7 @@ import java.util.ArrayList;
 public class ItemCollector {
 
 	private ArrayList<Items> items;
+
 	
 	public ItemCollector(){
 		items = new ArrayList<Items>();
@@ -54,10 +59,6 @@ public class ItemCollector {
 	public void checkCollisions(Craft a){
 		for(Items b: items){
 			b.collidesWith(a);
-			/*if(b.getBound().intersects(a.getBound()))
-				b.effect(a);
-				b.setVisible(false);
-				*/
 		}
 	}
 	

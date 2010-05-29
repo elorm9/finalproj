@@ -6,7 +6,7 @@ public class Enemy4 extends Enemy{
 	private String ref = "Planes/Enemy4.png";
     
 
-    
+    private boolean moveDown = true;
 
     public Enemy4()
     {
@@ -19,12 +19,42 @@ public class Enemy4 extends Enemy{
     	setImage(ref);
         setVisible(true);
         
+        setHP(20);
         setWidth(getImage().getWidth(null)-20);
         setHeight(getImage().getHeight(null));
         setDX(1);
         setDY(1);
         
     }
+    
+public void move() {
+		
+		int x = (int)getLocation().getX();
+    	int y = (int)getLocation().getY();
+    	
+    	
+    	//getLocation().translate(-1, 1);
+    	if(moveDown == true){
+    		getLocation().translate(-1, 1);
+    		
+    		if(y >= 300)
+    			moveDown = false;
+    	}
+    	
+    	else
+    	{
+    		getLocation().translate(-1, -1);
+    		if(y <= 50)
+    			moveDown = true;
+    	}
+
+    	
+    	if(!movedX)
+    		
+    	if( x <= -40)
+    		setVisible(false);
+
+	}
     
     
 }

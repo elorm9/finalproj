@@ -1,10 +1,9 @@
 package game;
 
-import game.Enemy.*;
-import game.Items.ItemCollector;
+import game.Collectors.EnemyCollector;
+import game.Collectors.ItemCollector;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -13,11 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.image.ImageObserver;
 
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -28,25 +25,21 @@ public class Board extends JPanel implements ActionListener{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private Timer timer;
-   
+	private Timer timer2;
+	
 	private Craft craft;
     private ItemCollector drops;
-    private Enemies opponents;
+    private EnemyCollector opponents;
     
     private Image background;
 
     
     public Board() {
-
-
-    	
-    	
-    	 ImageIcon ii = new ImageIcon(this.getClass().getResource("Background1.png"));
-         background = ii.getImage();
+    	ImageIcon ii = new ImageIcon(this.getClass().getResource("Background1.png"));
+        background = ii.getImage();
          
-
-        
         addKeyListener(new TAdapter());
         setFocusable(true);
         setBackground(Color.BLACK);
@@ -54,12 +47,25 @@ public class Board extends JPanel implements ActionListener{
 
         //create a user plane
         craft = new Craft(40,60);
-        opponents = new Enemies();
+        opponents = new EnemyCollector(20);
         drops = new ItemCollector();
         
         //create a timer
-        timer = new Timer(3, this);
+        timer = new Timer(5, this);
         timer.start();
+        
+        timer2 = new Timer(1000, new ActionListener(){
+
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent e) {
+				opponents.addEnemy();
+				
+			}
+        	
+        });
+        
+        timer2.start();
        
     }
 
@@ -76,10 +82,7 @@ public class Board extends JPanel implements ActionListener{
         craft.drawHP(g);
         craft.drawMissiles(g2d, this);
         
-        
-        opponents.drawEnemies(g2d, this);
-        opponents.drawHP(g);
-        opponents.drawEnemyMissiles(g2d, this);
+        opponents.draw(g2d, this);
 
         drops.drawItems(g2d, this);
         
@@ -94,7 +97,7 @@ public class Board extends JPanel implements ActionListener{
         //update the airplane's position
         craft.move();
         craft.missileAction(opponents.getEnemies());
-        
+
         opponents.removeEnemies(drops);
         opponents.move();
         opponents.missileAction(craft);
@@ -106,14 +109,14 @@ public class Board extends JPanel implements ActionListener{
         repaint();  
     }
 
-
+    /*
     private void drawBackground(final Graphics2D g2d, final ImageObserver i)
     {
     	g2d.drawImage(background, 0, 0, i);
     	
     }
-
-
+	*/
+    
     private void drawGUI(){
     	
     }

@@ -22,7 +22,7 @@ private String ref = "EnemyBullets/missileFlipped.png";
     	setWidth(getImage().getWidth(null)-23);
         setHeight(getImage().getHeight(null));
         
-        setSpeed(1);
+        setSpeed(2);
         setDamage(5);
         
         setVisible(true);
