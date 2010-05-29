@@ -19,7 +19,8 @@ public class Craft extends Airplane {
     private final int CRAFT_SIZE = 20;
     
     private int numMissiles;
-    private int numBullets;
+    private int numGreenBullets;
+    private int numBlueBullets;
     
     public Craft()
     {
@@ -35,7 +36,6 @@ public class Craft extends Airplane {
         setHP(100);
         
         numMissiles = 5;
-        numBullets = 200;
     }
 
 
@@ -43,24 +43,45 @@ public class Craft extends Airplane {
     	getLocation().translate(getDX(), getDY());
 	}
     
+    public int getNumMissiles(){
+    	return numMissiles;
+    }
+    
+    public void addMissiles(int a){
+    	numMissiles += a;
+    }
+    
+    public int getNumBGreenBullets(){
+    	return numGreenBullets;
+    }
+    
+    public void addGreenBullets(int a){
+    	numGreenBullets+= a;
+    }
+    
+    public int getNumBlueBullets(){
+    	return numBlueBullets;
+    }
+    
+    public void addBlueBullets(int a){
+    	numBlueBullets+= a;
+    }
+    
     public void fireRedBullet() {
     	int x = (int)getLocation().getX();
     	int y = (int)getLocation().getY();
     	
-    	if(numBullets > 0){
-    		getMissiles().add(new RedBullet(x + CRAFT_SIZE, y + CRAFT_SIZE/2 + 20));
-    		numBullets--;
-    	}
-    	System.out.println(numBullets);
+    	getMissiles().add(new RedBullet(x + CRAFT_SIZE, y + CRAFT_SIZE/2 + 20));
+
     }
     
     public void fireBlueBullet(){
     	int x = (int)getLocation().getX();
     	int y = (int)getLocation().getY();
     	
-    	if(numBullets > 0){
+    	if(numBlueBullets > 0){
     		getMissiles().add(new BlueBullet(x + CRAFT_SIZE, y + CRAFT_SIZE/2 + 20));	
-    		numBullets--;
+    		numBlueBullets--;
     	}
     }
     
@@ -68,9 +89,9 @@ public class Craft extends Airplane {
     	int x = (int)getLocation().getX();
     	int y = (int)getLocation().getY();
     	
-    	if(numBullets > 0){
+    	if(numGreenBullets > 0){
     		getMissiles().add(new GreenLaser(x + CRAFT_SIZE, y + CRAFT_SIZE/2 + 20));	
-    		numBullets--;
+    		numGreenBullets--;
     	}
     }
     

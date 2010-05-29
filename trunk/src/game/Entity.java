@@ -24,8 +24,22 @@ public abstract class Entity {
 	  
    	public abstract void move();
 	  
-	  
-   
+	public Entity(){
+		width = 0;
+		height = 0;
+		image = null;
+		
+		visible = false;
+	}
+   	public Entity(int x, int y){
+   		location = new Point(x,y);
+   		width = 0;
+		height = 0;
+		image = null;
+		
+		visible = false;
+   	}
+   	
     public Rectangle getBound(){
     	int x = (int)location.getX();
     	int y = (int)location.getY();
