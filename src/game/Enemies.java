@@ -63,14 +63,16 @@ public class Enemies {
 	
 	public void drawEnemies(Graphics2D g2d, ImageObserver j)
 	{
+		int x;
+		int y;
 		 if( enemies.size() > 0 ){
 	        	for(Enemy a: enemies)
 	        	{
-	        		g2d.drawImage(a.getImage(), a.getX(), a.getY(), j);
-	        		for(int i = 0; i < a.getMissiles().size(); i++){
-	        			Missile m = a.getMissiles().get(i);
-	        			g2d.drawImage(m.getImage(), m.getX(), m.getY(), j);
-	        		}
+	        		x = (int)a.getLocation().getX();
+	        		y = (int)a.getLocation().getY();
+	        		
+	        		g2d.drawImage(a.getImage(), x, y, j);
+	        		
 	        	}
 	        }
 	        else
@@ -78,6 +80,7 @@ public class Enemies {
 	        	createEnemies(); 
 	        }
 	}
+	
 	
 	private int countMissiles()
 	{

@@ -24,13 +24,11 @@ public abstract class Enemy extends Airplane{
 	public Enemy()
 	{
 		super();
-		HP = 20;
 	}
 	
 	public Enemy(int x, int y)
 	{
 		super(x,y);
-		HP = 50;
 	}
 	
 	@Override
@@ -40,7 +38,10 @@ public abstract class Enemy extends Airplane{
 	}
 
 	public void fireMissle() {
-		missiles.add(new EnemyMissile(getX() - CRAFT_SIZE, getY() + CRAFT_SIZE/2 + 20));
+		int x = (int)getLocation().getX();
+    	int y = (int)getLocation().getY();
+    	
+		getMissiles().add(new EnemyMissile(x - CRAFT_SIZE, y + CRAFT_SIZE/2 + 20));
 		hasAttacked = false;
 	}
 
@@ -50,26 +51,28 @@ public abstract class Enemy extends Airplane{
 		
 	}
 
-	public ArrayList<Missile> getMissiles() {
-		return missiles;
-	}
 
 	public void move() {
-		
+		int x = (int)getLocation().getX();
+    	int y = (int)getLocation().getY();
+    	
+    	if(x >= 700)
+			setMoved();
+    	
 		if( !movedX){
 			if( x > 300)
-				x -= dx;
+				getLocation().translate(-getDX(), 0);
+
 		}
 		
 		if( x <= 300 )
 			setMoved();
 		
 		if( movedX ){
-			x+= dx;
+			getLocation().translate(getDX(), 0);
 		}
 		
-		if(x >= 700)
-			setMoved();
+	
 	}
 	
 	private void setMoved()
@@ -83,6 +86,8 @@ public abstract class Enemy extends Airplane{
 	public void missileAction(Craft a)
 	{
 		attack();
+		ArrayList<Missile> missiles = getMissiles();
+
 		//for each missle in the missle arraylist
 	    for (int i = 0; i < missiles.size(); i++) {
 	    	
@@ -111,14 +116,18 @@ public abstract class Enemy extends Airplane{
 
 	public void drawHP(Graphics hp)
 	{
+		int x = (int) getLocation().getX();
+		int y = (int) getLocation().getY();
+
 	    Color green = new Color(0,255,0);
 	    hp.setColor(green);
 	    	
-	    hp.fillRect(x+30, y-3, HP, 5);
+	    hp.fillRect(x+30, y-3, getHP(), 5);
 	}	
 	
 	public void attack(){
-		
+		ArrayList<Missile> missiles = getMissiles();
+
 		if(missiles.size()<1)
 			fireMissle();
 		/*

@@ -1,16 +1,12 @@
 package game.Weapons;
 
-import javax.swing.ImageIcon;
 
 
 public class BlueBullet extends Missile{
 	
 
 	private String ref = "Bullets/12px-blue-arrow.png";
-    private final int BOARD_WIDTH = 800;
-    private final int MISSILE_SPEED = 3;
     
-    private int damage = 4;
     
     public BlueBullet()
     {
@@ -20,26 +16,16 @@ public class BlueBullet extends Missile{
     public BlueBullet(int x, int y) {
 
     	super(x,y);
-        ImageIcon ii = new ImageIcon(this.getClass().getResource(ref));
-        image = ii.getImage();
-  
-        width = image.getWidth(null)-23;
-        height = image.getHeight(null);
+    	setImage(ref);
+    	
+    	setSpeed(3);
+    	setDamage(4);
+    	
+    	setWidth(getImage().getWidth(null)-23);
+        setHeight(getImage().getHeight(null));
         
-        visible = true;
+        setVisible(true);
     }
-    
-
-    public void move() {
-        setSpeed(MISSILE_SPEED);
-        if (getX() > BOARD_WIDTH)
-            visible = false;
-    }
-
-
-	public int getDamage() {
-		return damage;	
-	}
     
 }
 

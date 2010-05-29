@@ -11,8 +11,6 @@ public class Enemy1 extends Enemy{
 
 	private String ref = "Planes/Enemy1.png";
     
-    private int dx = 1;
-    private int dy = 1;
     
     
     public Enemy1()
@@ -23,42 +21,16 @@ public class Enemy1 extends Enemy{
     public Enemy1(int x, int y) {
     	super(x,y);
     	
-    	ImageIcon ii = new ImageIcon(this.getClass().getResource(ref));
-        image = ii.getImage();
-        
-        width = image.getWidth(null)-20;
-        height = image.getHeight(null);
+    	setImage(ref);
+        setHP(20);
+        setWidth(getImage().getWidth(null)-20);
+        setHeight(getImage().getHeight(null));
+        setDX(1);
+        setDY(1);
         
     }
     
 
-	public void move() {
-	
-		if( !movedX){
-			if( x > 300)
-				x -= dx;
-		}
-		
-		if( x <= 300 )
-			setMoved();
-		
-		if( movedX ){
-			x+= dx;
-		}
-		
-		if(x >= 700)
-			setMoved();
-		
-		
-	}
-
-	private void setMoved()
-	{
-		if(movedX == false)
-			movedX = true;
-		else
-			movedX = false;
-	}
 
 
 
