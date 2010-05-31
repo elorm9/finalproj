@@ -202,8 +202,15 @@ public class EnemyCollector {
 	}
 	
 
+	public void explode(){
+		for(Enemy a: enemies){
+			if(a.getHP() <= 0)
+				a.explode();
+		}
+	}
 	
 	public void removeEnemies(ItemCollector a){
+	
 		for(int i = 0; i < enemies.size(); i++)
 		{
 			if(enemies.get(i).getHP() <= 0){

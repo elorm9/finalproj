@@ -13,6 +13,8 @@ import java.util.ArrayList;
 public class Craft extends Airplane {
 
     private String ref = "Images/Planes/plane2.png";
+    
+    
     private final int CRAFT_SIZE = 20;
     
     private int numMissiles;
@@ -28,6 +30,8 @@ public class Craft extends Airplane {
     	super(x,y);
     	
     	setImage(ref);
+    	setExplosion(getExplosionRef());
+    	
         setWidth(getImage().getWidth(null) -30 );
         setHeight(getImage().getHeight(null));
         setHP(100);
