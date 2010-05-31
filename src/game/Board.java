@@ -14,8 +14,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.ImageObserver;
 
-
-
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -33,7 +31,7 @@ public class Board extends JPanel implements ActionListener{
 	private Timer explode;
 	private Timer checkEnemies;
 
-	private MP3 music;
+	private boolean enemySpawn;
 	
 	private Craft craft;
     private ItemCollector drops;
@@ -63,7 +61,7 @@ public class Board extends JPanel implements ActionListener{
         refresh = new Timer(5, this);
         refresh.start();
         
-        checkEnemies = new Timer(4000, new ActionListener(){
+        checkEnemies = new Timer(200, new ActionListener(){
 
 			private static final long serialVersionUID = 1L;
 
@@ -123,9 +121,9 @@ public class Board extends JPanel implements ActionListener{
     }
 
     
-    public void paint(Graphics g) {
-        super.paint(g);
-
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
         Graphics2D g2d = (Graphics2D)g;
         
         drawGUI(g2d, this);
@@ -143,10 +141,11 @@ public class Board extends JPanel implements ActionListener{
         g.dispose();
     }
 
-
+    public void updateLevel(Graphics2D g2d){
+    	
+    }
     public void actionPerformed(ActionEvent e) {
         
-   
         //update the airplane's position
         craft.move();
         craft.missileAction(opponents.getEnemies());
