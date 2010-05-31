@@ -19,7 +19,7 @@ public abstract class Enemy extends Airplane{
 	protected boolean movedX = false;
 	protected boolean visible;
 	
-	private String ref = "explode.gif";
+	private String ref = "explode2.gif";
 	
 	protected final int CRAFT_SIZE = 20;
 	
@@ -108,6 +108,7 @@ public abstract class Enemy extends Airplane{
 	{
 		if(isExploded() == false){
 			attack();
+		}
 			ArrayList<Missile> missiles = getMissiles();
 
 			//for each missle in the missle arraylist
@@ -134,7 +135,7 @@ public abstract class Enemy extends Airplane{
 	    		//else delete it from the arraylist
 	    		else missiles.remove(i);
 			}
-		}
+		
 	}
 
 	public void drawHP(Graphics hp)
