@@ -19,7 +19,7 @@ public class GreenLaser extends Missile{
     	setWidth(getImage().getWidth(null)-23);
         setHeight(getImage().getHeight(null));
         
-        setDamage(5);
+        setDamage(7);
         setSpeed(4);
         
         setVisible(true);

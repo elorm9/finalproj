@@ -21,7 +21,7 @@ public class Item_HP extends Items{
 	}
 	
 	public void effect(Craft a) {
-		a.setHP(a.getHP()+20);
+		a.increaseHP(20);
 	}
 
 }

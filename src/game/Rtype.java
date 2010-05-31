@@ -1,4 +1,6 @@
 package game;
+import game.StartMenu.StartMenu;
+
 import javax.swing.JFrame;
 
 public class Rtype extends JFrame {
@@ -14,14 +16,16 @@ public class Rtype extends JFrame {
         add(new Board());
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 400);
+        setSize(800, 450);
         setLocationRelativeTo(null);
         setTitle("R - Type");
         setResizable(false);
+        
         setVisible(true);
     }
 
     public static void main(String[] args) {
-        new Rtype();
+    	new Rtype();
+    	
     }
 }
