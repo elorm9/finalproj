@@ -5,12 +5,9 @@ import game.Weapons.*;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 
 
 public class Craft extends Airplane {
@@ -34,6 +31,7 @@ public class Craft extends Airplane {
         setWidth(getImage().getWidth(null) -30 );
         setHeight(getImage().getHeight(null));
         setHP(100);
+        setMaxHP(100);
         
         numMissiles = 5;
     }
@@ -166,7 +164,7 @@ public class Craft extends Airplane {
     	Color green = new Color(0,255,0);
     	hp.setColor(green);
     	
-    	hp.fillRect(20, 330, getHP(), 15);
+    	hp.fillRect(20, 390, getHP(), 15);
     }
 	
     

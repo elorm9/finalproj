@@ -1,34 +1,20 @@
 package game;
+
 import game.Weapons.Missile;
-
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
-
-
 import java.awt.*;
-import java.net.*;
-import javax.swing.*;
 
 
 public abstract class Airplane extends Entity{
 	
-	
-	
-    
     private int HP;
+    private int maxHP;
     
 	private ArrayList <Missile> missiles = new ArrayList<Missile>();
 
     public abstract void fireRedBullet();
-    
     public abstract void fireBlueBullet();
     public abstract void fireMissle();
     
@@ -70,9 +56,21 @@ public abstract class Airplane extends Entity{
 	public void setHP(int h){
 		HP = h;
 	}
+	
 	public int getHP()
 	{
 		return HP;
+	}
+	
+	public void setMaxHP(int h){
+		maxHP = h;
+	}
+	
+	public void increaseHP(int h){
+		HP += h;
+		
+		if(HP > maxHP)
+			HP = maxHP;
 	}
 
 

@@ -4,17 +4,18 @@ import game.Collectors.EnemyCollector;
 import game.Collectors.ItemCollector;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.ImageObserver;
 
 
-import javax.swing.ImageIcon;
+
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -26,19 +27,24 @@ public class Board extends JPanel implements ActionListener{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Timer timer;
-	private Timer timer2;
+	private Timer refresh;
+	private Timer createEnemy;
+	private Timer updateOthers;
 	
 	private Craft craft;
     private ItemCollector drops;
     private EnemyCollector opponents;
     
-    private Image background;
-
+    //private Image background;
+    
+    private Font GUI;
     
     public Board() {
-    	ImageIcon ii = new ImageIcon(this.getClass().getResource("Background1.png"));
-        background = ii.getImage();
+    	//ImageIcon ii = new ImageIcon(this.getClass().getResource("Background1.png"));
+        //background = ii.getImage();
+        
+        
+        GUI = new Font("Monospaced", Font.BOLD, 15);
          
         addKeyListener(new TAdapter());
         setFocusable(true);
@@ -51,10 +57,10 @@ public class Board extends JPanel implements ActionListener{
         drops = new ItemCollector();
         
         //create a timer
-        timer = new Timer(5, this);
-        timer.start();
+        refresh = new Timer(5, this);
+        refresh.start();
         
-        timer2 = new Timer(1000, new ActionListener(){
+        createEnemy = new Timer(750, new ActionListener(){
 
 			private static final long serialVersionUID = 1L;
 
@@ -65,7 +71,27 @@ public class Board extends JPanel implements ActionListener{
         	
         });
         
-        timer2.start();
+        createEnemy.start();
+        
+        
+        updateOthers = new Timer(7, new ActionListener(){
+
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent e) {
+		        opponents.removeEnemies(drops);
+		        opponents.move();
+		        opponents.missileAction(craft);
+		        
+		        drops.removeItems();
+		        drops.moveItems();
+		        drops.checkCollisions(craft);
+				
+			}
+        	
+        });
+        
+        updateOthers.start();
        
     }
 
@@ -75,7 +101,7 @@ public class Board extends JPanel implements ActionListener{
 
         Graphics2D g2d = (Graphics2D)g;
         
-        drawGUI();
+        drawGUI(g2d, this);
         //drawBackground(g2d, this);
         
         craft.draw(g2d, this);
@@ -97,14 +123,7 @@ public class Board extends JPanel implements ActionListener{
         //update the airplane's position
         craft.move();
         craft.missileAction(opponents.getEnemies());
-
-        opponents.removeEnemies(drops);
-        opponents.move();
-        opponents.missileAction(craft);
         
-        drops.removeItems();
-        drops.moveItems();
-        drops.checkCollisions(craft);
         //update the current image
         repaint();  
     }
@@ -112,14 +131,47 @@ public class Board extends JPanel implements ActionListener{
     /*
     private void drawBackground(final Graphics2D g2d, final ImageObserver i)
     {
+    	
     	g2d.drawImage(background, 0, 0, i);
     	
     }
 	*/
     
-    private void drawGUI(){
-    	
-    }
+  /*  public void initFont() throws FontFormatException, IOException{
+    
+    	File file = new File("Radiof.ttf");
+    	FileInputStream fis = new FileInputStream(file);
+    	GUI = Font.createFont(Font.TRUETYPE_FONT, fis);
+    }*/
+    
+	public void drawGUI(Graphics2D g2d, ImageObserver i){
+		String numMissiles = "Missiles: " + craft.getNumMissiles();
+		String numBlueBullets = "Blue Bullets:" + craft.getNumBlueBullets();
+		String numGreenBullets = "Green Lasers:" + craft.getNumBGreenBullets();
+		String userHP = "HP";
+		
+		g2d.setFont(GUI);
+		
+		Color red = new Color(255, 100,0);
+		Color blue = new Color(0,100,255);
+		Color green = new Color(0,255,100);
+		
+		g2d.fill3DRect(0, 370, 800, 50, true);
+		
+    	g2d.setColor(red);
+		g2d.drawString(numMissiles, 150, 400);
+		
+		g2d.setColor(blue);
+		g2d.drawString(numBlueBullets, 270, 400);
+		
+		g2d.setColor(green);
+		g2d.drawString(numGreenBullets, 410, 400);
+		
+		craft.drawHP(g2d);
+		g2d.drawString(userHP, 60, 385);
+
+		
+	}
 
  
     
