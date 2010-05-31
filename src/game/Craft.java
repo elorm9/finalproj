@@ -36,7 +36,7 @@ public class Craft extends Airplane {
         setHeight(getImage().getHeight(null));
         setHP(100);
         setMaxHP(100);
-        
+        initSounds();
         numMissiles = 5;
     }
 
@@ -72,7 +72,7 @@ public class Craft extends Airplane {
     public void fireRedBullet() {
     	int x = (int)getLocation().getX();
     	int y = (int)getLocation().getY();
-    	
+    	getL1().loop();
     	getMissiles().add(new RedBullet(x + CRAFT_SIZE, y + CRAFT_SIZE/2 + 20));
 
     }
@@ -83,6 +83,7 @@ public class Craft extends Airplane {
     	
     	if(numBlueBullets > 0){
     		getMissiles().add(new BlueBullet(x + CRAFT_SIZE, y + CRAFT_SIZE/2 + 20));	
+    		getL2().play();
     		numBlueBullets--;
     	}
     }

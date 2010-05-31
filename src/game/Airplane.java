@@ -1,12 +1,15 @@
 package game;
 
 import game.Weapons.Missile;
+
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
+import java.net.URL;
 import java.util.ArrayList;
 import java.awt.*;
 
-import javax.swing.ImageIcon;
 
 
 public abstract class Airplane extends Entity{
@@ -17,7 +20,12 @@ public abstract class Airplane extends Entity{
     private String explosionRef = "Images/Planes/explode.gif";
     
 	private ArrayList <Missile> missiles = new ArrayList<Missile>();
-
+	
+	private AudioClip laser1;
+	private AudioClip laser2;
+	private AudioClip laser3;
+	private AudioClip explode;
+	
     public abstract void fireRedBullet();
     public abstract void fireBlueBullet();
     public abstract void fireMissle();
@@ -80,7 +88,36 @@ public abstract class Airplane extends Entity{
 	public String getExplosionRef(){
 		return explosionRef;
 	}
-
+	
+	public void explode(){
+		super.explode();
+	}
+	
+	public void initSounds(){
+		
+		URL url = this.getClass().getResource("Sounds/Laser1.wav");
+		laser1 = Applet.newAudioClip(url);
+		
+		url = this.getClass().getResource("Sounds/Laser2.wav");
+		laser2 = Applet.newAudioClip(url);
+		
+		url = this.getClass().getResource("Sounds/Laser3.wav");
+		laser3 = Applet.newAudioClip(url);
+		
+		url = this.getClass().getResource("Sounds/Explode.aif");
+		explode = Applet.newAudioClip(url);
+	}
+	public AudioClip getL1(){
+		return laser1;
+	}
+	
+	public AudioClip getL2(){
+		return laser2;
+	}
+	
+	public AudioClip getL3(){
+		return laser3;
+	}
 
 }
 
