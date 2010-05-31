@@ -116,6 +116,7 @@ public abstract class Entity {
 	    ImageIcon ii = new ImageIcon(this.getClass().getResource(ref));
 	    image = ii.getImage();
 	}
+
 	
 	public void setExplosion(String ref){
 	    ImageIcon ii = new ImageIcon(this.getClass().getResource(ref));
@@ -138,5 +139,7 @@ public abstract class Entity {
 	public Image getImage() {
 		return image;
 	}
+
+	
 
 }

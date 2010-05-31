@@ -32,6 +32,8 @@ public class Board extends JPanel implements ActionListener{
 	private Timer updateOthers;
 	private Timer explode;
 	private Timer checkEnemies;
+
+	private MP3 music;
 	
 	private Craft craft;
     private ItemCollector drops;
@@ -44,8 +46,7 @@ public class Board extends JPanel implements ActionListener{
     public Board() {
     	//ImageIcon ii = new ImageIcon(this.getClass().getResource("Background1.png"));
         //background = ii.getImage();
-        
-        
+    	
         GUI = new Font("Monospaced", Font.BOLD, 15);
          
         addKeyListener(new TAdapter());
