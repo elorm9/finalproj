@@ -19,6 +19,8 @@ public abstract class Enemy extends Airplane{
 	protected boolean movedX = false;
 	protected boolean visible;
 	
+	private String ref = "explode.gif";
+	
 	protected final int CRAFT_SIZE = 20;
 	
 	protected final int ATTACK_DELAY = 200;
@@ -32,6 +34,9 @@ public abstract class Enemy extends Airplane{
 		super(x,y);
 	}
 	
+	public String getRef(){
+		return ref;
+	}
 	@Override
 	public void fireBlueBullet() {
 		// TODO Auto-generated method stub
@@ -101,33 +106,35 @@ public abstract class Enemy extends Airplane{
 	
 	public void missileAction(Craft a)
 	{
-		attack();
-		ArrayList<Missile> missiles = getMissiles();
+		if(isExploded() == false){
+			attack();
+			ArrayList<Missile> missiles = getMissiles();
 
-		//for each missle in the missle arraylist
-	    for (int i = 0; i < missiles.size(); i++) {
+			//for each missle in the missle arraylist
+			for (int i = 0; i < missiles.size(); i++) {
 	    	
 	    	Missile m =  missiles.get(i);  
 	    	
-	        //if the missile is visible, the continue moving it
+	        	//if the missile is visible, the continue moving it
 	    	
-	        if (m.isVisible() == true)
-	        {
-	        	Rectangle craftBound = a.getBound();
+	    		if (m.isVisible() == true)
+	    		{
+	    			Rectangle craftBound = a.getBound();
 	        	
-	        	if(m.getBound().intersects(craftBound)){
-        			a.takeDamage(m.getDamage());
-            		m.setVisible(false);
-            		missiles.remove(i);
+	    			if(m.getBound().intersects(craftBound)){
+	    				a.takeDamage(m.getDamage());
+	    				m.setVisible(false);
+	    				missiles.remove(i);
             		
-	        	}
-	        	m.move();
+	    			}
+	    			m.move();
 	        
 	            	
-	        }
-	        //else delete it from the arraylist
-	        else missiles.remove(i);
-	    }
+	    		}
+	    		//else delete it from the arraylist
+	    		else missiles.remove(i);
+			}
+		}
 	}
 
 	public void drawHP(Graphics hp)

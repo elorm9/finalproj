@@ -30,6 +30,8 @@ public class Board extends JPanel implements ActionListener{
 	private Timer refresh;
 	private Timer createEnemy;
 	private Timer updateOthers;
+	private Timer explode;
+	private Timer checkEnemies;
 	
 	private Craft craft;
     private ItemCollector drops;
@@ -60,26 +62,50 @@ public class Board extends JPanel implements ActionListener{
         refresh = new Timer(5, this);
         refresh.start();
         
+        checkEnemies = new Timer(4000, new ActionListener(){
+
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent e) {
+					opponents.removeEnemies(drops);
+			}
+        	
+        });
+        
+        checkEnemies.start();
+        
         createEnemy = new Timer(750, new ActionListener(){
 
 			private static final long serialVersionUID = 1L;
 
 			public void actionPerformed(ActionEvent e) {
-				opponents.addEnemy();
-				
+					opponents.addEnemy();
+					opponents.removeEnemies(drops);
 			}
         	
         });
         
         createEnemy.start();
+       
+        explode = new Timer(5, new ActionListener(){
+
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent e) {
+				opponents.explode();
+				
+			}
+        	
+        });
         
+        explode.start();
         
         updateOthers = new Timer(7, new ActionListener(){
 
 			private static final long serialVersionUID = 1L;
 
 			public void actionPerformed(ActionEvent e) {
-		        opponents.removeEnemies(drops);
+		      
 		        opponents.move();
 		        opponents.missileAction(craft);
 		        

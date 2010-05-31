@@ -18,10 +18,13 @@ public abstract class Entity {
    
    	private int width;
    	private int height;
+   	
    	private Image image;
+    private Image explosion;
     
    	private boolean visible;
-	  
+	private boolean isExploded = false;
+	
    	public abstract void move();
 	  
 	public Entity(){
@@ -31,6 +34,7 @@ public abstract class Entity {
 		
 		visible = false;
 	}
+	
    	public Entity(int x, int y){
    		location = new Point(x,y);
    		width = 0;
@@ -43,8 +47,11 @@ public abstract class Entity {
     public Rectangle getBound(){
     	int x = (int)location.getX();
     	int y = (int)location.getY();
-    	return new Rectangle(x, y, image.getWidth(null), image.getHeight(null));
     	
+    	if(isExploded == false)
+    		return new Rectangle(x, y, image.getWidth(null), image.getHeight(null));
+    	else
+    		return new Rectangle(x,y, 1,1);
     }
     
 
@@ -108,6 +115,24 @@ public abstract class Entity {
 	public void setImage(String ref){
 	    ImageIcon ii = new ImageIcon(this.getClass().getResource(ref));
 	    image = ii.getImage();
+	}
+	
+	public void setExplosion(String ref){
+	    ImageIcon ii = new ImageIcon(this.getClass().getResource(ref));
+	    explosion = ii.getImage();
+	}
+	
+	public Image getExplosion(){
+		return explosion;
+	}
+	
+	public void explode(){
+		image = explosion;
+		isExploded = true;
+	}
+	
+	public boolean isExploded(){
+		return isExploded;
 	}
 	
 	public Image getImage() {

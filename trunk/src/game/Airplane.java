@@ -6,11 +6,15 @@ import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 import java.awt.*;
 
+import javax.swing.ImageIcon;
+
 
 public abstract class Airplane extends Entity{
 	
     private int HP;
     private int maxHP;
+    
+    private String explosionRef = "Images/Planes/explode.gif";
     
 	private ArrayList <Missile> missiles = new ArrayList<Missile>();
 
@@ -73,7 +77,9 @@ public abstract class Airplane extends Entity{
 			HP = maxHP;
 	}
 
-
+	public String getExplosionRef(){
+		return explosionRef;
+	}
 
 
 }

@@ -20,7 +20,7 @@ public class Enemy1 extends Enemy{
         setHeight(getImage().getHeight(null));
         setDX(1);
         setDY(1);
-        
+        setExplosion(getRef());
     }
     
 

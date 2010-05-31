@@ -23,6 +23,7 @@ public class Enemy3 extends Enemy{
         
         setDX(1);
         setDY(1);
+        setExplosion(getRef());
     }
     
 	public void move() {
@@ -31,29 +32,28 @@ public class Enemy3 extends Enemy{
     	int y = (int)getLocation().getY();
     	
     	
-    	//getLocation().translate(-1, 1);
-    	if(moveUp == true){
-    		getLocation().translate(-1, -1);
+    	if(isExploded() == false){
+    		//getLocation().translate(-1, 1);
+    		if(moveUp == true){
+    			getLocation().translate(-1, -1);
     		
-    		if(y <= 50)
-    			moveUp = false;
-    	}
+    			if(y <= 50)
+    				moveUp = false;
+    		}
     	
+    		else
+    		{
+    			getLocation().translate(-1, 1);
+    			if(y >= 300)
+    				moveUp = true;
+    		}
+
+	    	if(!movedX)
+	    		if( x <= -40)
+	    			setVisible(false);
+    		}
     	else
-    	{
-    		getLocation().translate(-1, 1);
-    		if(y >= 300)
-    			moveUp = true;
-    	}
-
-    	
-    	
-    	if(!movedX)
-    		
-    	
-    	if( x <= -40)
-    		setVisible(false);
-
+    		super.move();
 	}
 		
 

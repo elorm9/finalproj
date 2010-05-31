@@ -24,7 +24,7 @@ public class Enemy4 extends Enemy{
         setHeight(getImage().getHeight(null));
         setDX(1);
         setDY(1);
-        
+        setExplosion(getRef());
     }
     
 public void move() {
@@ -34,26 +34,29 @@ public void move() {
     	
     	
     	//getLocation().translate(-1, 1);
-    	if(moveDown == true){
-    		getLocation().translate(-1, 1);
+    	if(isExploded() == false){
+    		if(moveDown == true){
+    			getLocation().translate(-1, 1);
     		
-    		if(y >= 300)
-    			moveDown = false;
-    	}
+    			if(y >= 300)
+    				moveDown = false;
+    		}	
     	
+    		else
+    		{
+    			getLocation().translate(-1, -1);
+    			if(y <= 50)
+    				moveDown = true;
+    		}
+
+    	
+    		if(!movedX)
+    		
+    			if( x <= -40)
+    				setVisible(false);
+    	}
     	else
-    	{
-    		getLocation().translate(-1, -1);
-    		if(y <= 50)
-    			moveDown = true;
-    	}
-
-    	
-    	if(!movedX)
-    		
-    	if( x <= -40)
-    		setVisible(false);
-
+    		super.move();
 	}
     
     
