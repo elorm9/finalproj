@@ -9,14 +9,16 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 
+//this class creates the player's airplane
 
 public class Craft extends Airplane {
 
+	//reference to the airplane's image file
     private String ref = "Images/Planes/plane2.png";
-    
-    
+   
     private final int CRAFT_SIZE = 20;
     
+    //number of missiles and bullets that the airplane has
     private int numMissiles;
     private int numGreenBullets;
     private int numBlueBullets;
@@ -40,35 +42,42 @@ public class Craft extends Airplane {
         numMissiles = 5;
     }
 
-
+    //moves the airplane according to the current values of DX and DY
     public void move() {
     	getLocation().translate(getDX(), getDY());
 	}
     
+    //return the number of missiles that the airplane has
     public int getNumMissiles(){
     	return numMissiles;
     }
     
+    //increase the stockpile of missiles that the airplane has
     public void addMissiles(int a){
     	numMissiles += a;
     }
     
+    //return the number of green bullets that the airplane has
     public int getNumBGreenBullets(){
     	return numGreenBullets;
     }
     
+    //increase the stockpile of green bullets that the airplane has
     public void addGreenBullets(int a){
     	numGreenBullets+= a;
     }
     
+  //return the number of blue bullets that the airplane has
     public int getNumBlueBullets(){
     	return numBlueBullets;
     }
     
+    //increase the stockpile of blue bullets that the airplane has
     public void addBlueBullets(int a){
     	numBlueBullets+= a;
     }
     
+    //fires a red bullet
     public void fireRedBullet() {
     	int x = (int)getLocation().getX();
     	int y = (int)getLocation().getY();
@@ -77,6 +86,7 @@ public class Craft extends Airplane {
 
     }
     
+    //fires a blue bullet
     public void fireBlueBullet(){
     	int x = (int)getLocation().getX();
     	int y = (int)getLocation().getY();
@@ -88,6 +98,7 @@ public class Craft extends Airplane {
     	}
     }
     
+    //fires a laser (green bullet)
     public void fireLaser(){
     	int x = (int)getLocation().getX();
     	int y = (int)getLocation().getY();
@@ -98,6 +109,7 @@ public class Craft extends Airplane {
     	}
     }
     
+    //fires a missile
     public void fireMissle(){
     	int x = (int)getLocation().getX();
     	int y = (int)getLocation().getY();
@@ -109,22 +121,27 @@ public class Craft extends Airplane {
 
     }
  
+    
     public void keyPressed(KeyEvent e) {
 
         int key = e.getKeyCode();
-
+        
+        //if the user presses the left arrow key then set the x-displacement to -2
         if (key == KeyEvent.VK_LEFT) {
             setDX(-2);
         }
-
+        
+        //if the user presses the right arrow key then set the x-displacement to 2
         if (key == KeyEvent.VK_RIGHT) {
         	setDX(2);
         }
-
+        
+        //if the user presses the up arrow key then set the y-displacement to -2
         if (key == KeyEvent.VK_UP) {
             setDY(-2);
         }
-
+        
+        //if the user presses the down arrow key then set the y-displacement to 2
         if (key == KeyEvent.VK_DOWN) {
             setDY(2);
         }
@@ -132,7 +149,8 @@ public class Craft extends Airplane {
 
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
-
+        
+        //once any of the arrow keys have been released, set all the displacements to 0
         if (key == KeyEvent.VK_LEFT) {
             setDX(0);
         }
@@ -163,12 +181,14 @@ public class Craft extends Airplane {
         	fireLaser();
 
     }
-
+    
+    //draws the HP bar in the bottom left corner
     public void drawHP(Graphics hp)
     {
     	Color green = new Color(0,255,0);
     	hp.setColor(green);
     	
+    	//draw a rectangle (HP BAR) at the coordinates (20,390)
     	hp.fillRect(20, 390, getHP(), 15);
     }
 	

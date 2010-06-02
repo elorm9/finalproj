@@ -20,15 +20,20 @@ public class EnemyCollector {
 
 	//holds all the enemies
 	
+	//arraylist of all the enemies
 	private ArrayList<Enemy> enemies;
+	
+	//number of enemies to create
 	private int numEnemies;
 	
+	//default constructor
 	public EnemyCollector()
 	{
 		enemies = new ArrayList<Enemy>();
 		addEnemy();
 	}
 	
+	//construct a new object with a set number of enemies to create
 	public EnemyCollector(int numEnemies)
 	{
 		enemies = new ArrayList<Enemy>();
@@ -36,7 +41,7 @@ public class EnemyCollector {
 		addEnemy();
 	}
 	
-	//add a random enemy into the list
+	//add a random enemy into the arraylist
 	public void addEnemy(){
 		
 		int x = 800;
@@ -123,37 +128,39 @@ public class EnemyCollector {
 	}
 	*/
 	
+	//basic draw function
 	public void draw(Graphics2D g2d, ImageObserver j){
 		drawEnemies(g2d,j);
 		drawHP(g2d);
 		drawEnemyMissiles(g2d, j);
 	}
+	
+	//draw all enemies
 	private void drawEnemies(Graphics2D g2d, ImageObserver j)
 	{
-		int x;
-		int y;
+		//if enemies are present then draw them all
 		 if( enemies.size() > 0 ){
 	        	for(Enemy a: enemies)
 	        	{
-	        		x = (int)a.getLocation().getX();
-	        		y = (int)a.getLocation().getY();
-	        		
-	        		g2d.drawImage(a.getImage(), x, y, j);
-	        		
+	        		a.draw(g2d, j);
 	        	}
 	        }
 	        else
 	        {
-	        	addEnemy(); 
+	        	//otherwise, create a new enemy if possible
+	        	if(numEnemies >0)
+	        		addEnemy(); 
 	        }
 	}
 	
+	//draw the HP of all the enemies
 	private void drawHP(Graphics g)
 	{
 		for(Enemy a : enemies)
 			a.drawHP(g);
 	}
 	
+	//draw all the missiles of the enemies
 	private void drawEnemyMissiles(Graphics2D g2d, ImageObserver j)
 	{
 		if( countMissiles() > 0)
@@ -165,8 +172,7 @@ public class EnemyCollector {
 		}
 	}
 	
-	
-	
+	//sum the number of missiles of each enemy
 	private int countMissiles()
 	{
 		int i = 0;
@@ -177,37 +183,41 @@ public class EnemyCollector {
 	}
 	
 
-	
+	//move the enemy missiles and handle their collisions with the user's airplane
 	public void missileAction(Craft a)
 	{
 		for(Enemy b: enemies)
 			b.missileAction(a);
 	}
 	
+	//move all the enemies
 	public void move()
 	{
 		for(Enemy a: enemies)
 			a.move();
 	}
 	
+
 	public void attack()
 	{
 		for(Enemy a: enemies)
 			a.attack();
 	}
 	
+	//get the arraylist of enemies
 	public ArrayList<Enemy> getEnemies()
 	{
 		return enemies;
 	}
 	
-
+	//if any enemies have no more HP left then invoke the explode function
 	public void explode(){
 		for(Enemy a: enemies){
 			if(a.getHP() <= 0)
 				a.explode();
 		}
 	}
+	
 	
 	public void removeEnemies(ItemCollector a){
 	

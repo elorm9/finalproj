@@ -129,12 +129,15 @@ public class Board extends JPanel implements ActionListener{
         drawGUI(g2d, this);
         //drawBackground(g2d, this);
         
+        //draw the user's airplane, hp, and current missiles
         craft.draw(g2d, this);
         craft.drawHP(g);
         craft.drawMissiles(g2d, this);
         
+        //draw all the enemies
         opponents.draw(g2d, this);
 
+        //draw any items that have been dropped by enemies
         drops.drawItems(g2d, this);
         
         Toolkit.getDefaultToolkit().sync();
@@ -148,6 +151,8 @@ public class Board extends JPanel implements ActionListener{
         
         //update the airplane's position
         craft.move();
+        
+        //move the user's missiles and handle their collisions with the enemies
         craft.missileAction(opponents.getEnemies());
         
         //update the current image
