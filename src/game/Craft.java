@@ -32,7 +32,7 @@ public class Craft extends Airplane {
     	setImage(ref);
     	setExplosion(getExplosionRef());
     	
-        setWidth(getImage().getWidth(null) -30 );
+        setWidth(getImage().getWidth(null) -80);
         setHeight(getImage().getHeight(null));
         setHP(100);
         setMaxHP(100);
