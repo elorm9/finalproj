@@ -14,6 +14,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.ImageObserver;
 
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -37,23 +38,25 @@ public class Board extends JPanel implements ActionListener{
     private ItemCollector drops;
     private EnemyCollector opponents;
     
-    //private Image background;
+    
     
     private Font GUI;
     
     public Board() {
-    	//ImageIcon ii = new ImageIcon(this.getClass().getResource("Background1.png"));
-        //background = ii.getImage();
-    	
+
         GUI = new Font("Monospaced", Font.BOLD, 15);
          
         addKeyListener(new TAdapter());
         setFocusable(true);
-        setBackground(Color.BLACK);
-
-
+        setOpaque(false);
+        
+ 
+        
+        
         //create a user plane
         craft = new Craft(40,60);
+        
+        //
         opponents = new EnemyCollector(20);
         drops = new ItemCollector();
         
@@ -99,7 +102,7 @@ public class Board extends JPanel implements ActionListener{
         
         explode.start();
         
-        updateOthers = new Timer(7, new ActionListener(){
+        updateOthers = new Timer(1, new ActionListener(){
 
 			private static final long serialVersionUID = 1L;
 
@@ -127,7 +130,7 @@ public class Board extends JPanel implements ActionListener{
         Graphics2D g2d = (Graphics2D)g;
         
         drawGUI(g2d, this);
-        //drawBackground(g2d, this);
+        
         
         craft.draw(g2d, this);
         craft.drawHP(g);
@@ -155,12 +158,7 @@ public class Board extends JPanel implements ActionListener{
     }
 
     /*
-    private void drawBackground(final Graphics2D g2d, final ImageObserver i)
-    {
-    	
-    	g2d.drawImage(background, 0, 0, i);
-    	
-    }
+    
 	*/
     
   /*  public void initFont() throws FontFormatException, IOException{
