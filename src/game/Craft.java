@@ -114,19 +114,31 @@ public class Craft extends Airplane {
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_LEFT) {
-            setDX(-2);
+        	if(getLocation().getX() < 0)
+        		setDX(0);
+        	else
+        		setDX(-2);
         }
 
         if (key == KeyEvent.VK_RIGHT) {
-        	setDX(2);
+        	if(getLocation().getX()>740)
+        		setDX(0);
+        	else	
+        		setDX(2);
         }
 
         if (key == KeyEvent.VK_UP) {
-            setDY(-2);
+        	if(getLocation().getY() < 0)
+        		setDY(0);
+        	else
+        		setDY(-2);
         }
 
         if (key == KeyEvent.VK_DOWN) {
-            setDY(2);
+        	if(getLocation().getY() > 310)
+        		setDY(0);
+        	else
+        		setDY(2);
         }
     }
 
