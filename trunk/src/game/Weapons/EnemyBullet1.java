@@ -19,7 +19,7 @@ public class EnemyBullet1 extends Missile{
     	setWidth(getImage().getWidth(null)-23);
         setHeight(getImage().getHeight(null));
         
-        setSpeed(2);
+        setDX(2);
         setDamage(5);
         
         setVisible(true);
@@ -36,7 +36,6 @@ public class EnemyBullet1 extends Missile{
     	setWidth(getImage().getWidth(null));
         setHeight(getImage().getHeight(null));
         
-        setSpeed(2);
         setDamage(5);
         
         setVisible(true);

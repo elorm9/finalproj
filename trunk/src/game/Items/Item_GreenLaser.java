@@ -2,6 +2,7 @@ package game.Items;
 
 import game.Craft;
 
+//this item appears as a green orb, it increases the user's number of green bullets
 public class Item_GreenLaser extends Items{
 
 	private String ref = "12px-green-round.png";

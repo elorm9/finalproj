@@ -4,13 +4,15 @@ package game.Weapons;
 import game.Entity;
 
 
-
+//standard missile class
 public abstract class Missile extends Entity{
 
+	//used to determine when the missiles has passed the x-coordinate of 800
 	private final int BOARD_WIDTH = 800;
 	
+	//amount of damage that the missile delivers
     private int damage;
-    private int speed;
+    
     
     public Missile()
     {
@@ -27,26 +29,20 @@ public abstract class Missile extends Entity{
         damage = 2;
     }
     
+    //update the missile's position
     public void move() {
-    	getLocation().translate(speed, 0);
+    	getLocation().translate(getDX(), 0);
         if (getLocation().getX() > BOARD_WIDTH)
            setVisible(false);
     }
     
     
-    public void setSpeed(int s)
-    {
-    	speed = s;
-    }
-    
-    public int getSpeed(){
-    	return speed;
-    }
-    
+    //get the damage of the missile
     public int getDamage(){
     	return damage;
     }
     
+    //set the damage of the missile
     public void setDamage(int d){
     	damage = d;
     }

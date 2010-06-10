@@ -18,7 +18,7 @@ public class BlueBullet extends Missile{
     	super(x,y);
     	setImage(ref);
     	
-    	setSpeed(3);
+    	setDX(3);
     	setDamage(5);
     	
     	setWidth(getImage().getWidth(null)-23);

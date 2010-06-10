@@ -12,20 +12,26 @@ import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
+//handles the items that are dropped by enemies
 public class ItemCollector {
 
+	//arraylist of items
 	private ArrayList<Items> items;
 
 	
+	//default constructor which initailizes the
+	//item arraylist
 	public ItemCollector(){
 		items = new ArrayList<Items>();
 	}
 	
+	//adds an item to the arraylist of items
 	public void addItem(Items a)
 	{
 		items.add(a);
 	}
 	
+	//adds a random item into the arraylist of items
 	public void addRandomItem(Enemy b){
 		int chance = 0;
 		int x = (int)b.getLocation().getX();
@@ -46,22 +52,26 @@ public class ItemCollector {
 						addItem(new Item_Missile(x,y));
 	}
 	
+	//returns the arraylits of items
 	public ArrayList<Items> getItems(){
 		return items;
 	}
 	
+	//moves each item on the board
 	public void moveItems(){
 		for(Items a: items){
 			a.move();
 		}
 	}
 	
+	//checks item collisions with the user's craft
 	public void checkCollisions(Craft a){
 		for(Items b: items){
 			b.collidesWith(a);
 		}
 	}
 	
+	//draws each item of the item arraylist
 	public void drawItems(Graphics2D g2d, ImageObserver j){
 		int x = 0;
 		int y = 0;
@@ -73,6 +83,7 @@ public class ItemCollector {
 		}
 	}
 	
+	//checks each item's visibility and them accordingly
 	public void removeItems(){
 		for(int i = 0; i < items.size(); i++)
 		{

@@ -16,17 +16,22 @@ import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
+//an enemy collector holds an arraylist of enemies 
+//and handles them accordingly
+
 public class EnemyCollector {
 
-	//holds all the enemies
-	
+	//arraylist of enemies
 	private ArrayList<Enemy> enemies;
+	
+	//determines how many enemies to create
 	private int numEnemies;
 	
+	//default constructor
 	public EnemyCollector()
 	{
+		//initialize the arraylist
 		enemies = new ArrayList<Enemy>();
-		addEnemy();
 	}
 	
 	public EnemyCollector(int numEnemies)
@@ -39,15 +44,19 @@ public class EnemyCollector {
 	//add a random enemy into the list
 	public void addEnemy(){
 		
+		//x and y coordinate for where enemies start
 		int x = 800;
+		
+		//y coordinate is generated randomly
 		int y =  (int) (Math.random()*300);
 		
 		Enemy a = null;
+		
+		//j is used to determine which enemy to create
 		int j = (int) (Math.random()*6);
 		
-		
+		//creates an enemy based on the value of j
 		if(numEnemies > 0){
-		//x = (int) (Math.random()*400)+300;
 			if( j == 0)
 				a = new Enemy1(x,y);
 			
@@ -75,7 +84,6 @@ public class EnemyCollector {
 			numEnemies--;
 			enemies.add(a);
 		}
-		
 		
 		
 	}
@@ -123,11 +131,14 @@ public class EnemyCollector {
 	}
 	*/
 	
+	//main draw function
 	public void draw(Graphics2D g2d, ImageObserver j){
 		drawEnemies(g2d,j);
 		drawHP(g2d);
 		drawEnemyMissiles(g2d, j);
 	}
+	
+	//draw all  enemies on the screen
 	private void drawEnemies(Graphics2D g2d, ImageObserver j)
 	{
 		int x;
@@ -148,14 +159,17 @@ public class EnemyCollector {
 	        }
 	}
 	
+	//draw the HP bar of each enemy
 	private void drawHP(Graphics g)
 	{
 		for(Enemy a : enemies)
 			a.drawHP(g);
 	}
 	
+	//draw all enemy missiles
 	private void drawEnemyMissiles(Graphics2D g2d, ImageObserver j)
 	{
+		//if there are enemy missiles then draw them
 		if( countMissiles() > 0)
 		{
 			for(Enemy a: enemies)
@@ -166,7 +180,7 @@ public class EnemyCollector {
 	}
 	
 	
-	
+	//count the number total number of enemy missiles
 	private int countMissiles()
 	{
 		int i = 0;
@@ -177,38 +191,45 @@ public class EnemyCollector {
 	}
 	
 
-	
+	//handles enemy missile collisions with the user's craft
 	public void missileAction(Craft a)
 	{
 		for(Enemy b: enemies)
 			b.missileAction(a);
 	}
 	
+	//updates the position of each enemy
 	public void move()
 	{
 		for(Enemy a: enemies)
 			a.move();
 	}
 	
+	//causes each enemy to attack
 	public void attack()
 	{
 		for(Enemy a: enemies)
 			a.attack();
 	}
 	
+	//return the arraylist of enemies
 	public ArrayList<Enemy> getEnemies()
 	{
 		return enemies;
 	}
 	
-
+	
+	//initiates the explode function
 	public void explode(){
 		for(Enemy a: enemies){
+			//if an enemy's hp is less than 1 then invoke the explode function
 			if(a.getHP() <= 0)
 				a.explode();
 		}
 	}
 	
+	//checks enemies to see if they are still visible
+	//and removes them accordingly
 	public void removeEnemies(ItemCollector a){
 	
 		for(int i = 0; i < enemies.size(); i++)
@@ -224,11 +245,13 @@ public class EnemyCollector {
 				}
 		}
 	}
-
+	
+	//sets the number of enemies
 	public void setNumEnemies(int numEnemies) {
 		this.numEnemies = numEnemies;
 	}
-
+	
+	//gets the number of enemies
 	public int getNumEnemies() {
 		return numEnemies;
 	}

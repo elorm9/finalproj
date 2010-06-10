@@ -22,7 +22,7 @@ public class RedBullet extends Missile{
         setHeight(getImage().getHeight(null));
         
         setDamage(3);
-        setSpeed(3);
+        setDX(3);
         setVisible(true);
     }
 

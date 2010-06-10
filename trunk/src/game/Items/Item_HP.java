@@ -2,6 +2,8 @@ package game.Items;
 
 import game.Craft;
 
+//this item appears as a white ball,
+//it increases the user's HP
 public class Item_HP extends Items{
 
 	String ref = "40px-electric.png";

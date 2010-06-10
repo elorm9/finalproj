@@ -13,33 +13,39 @@ import game.Weapons.EnemyBullet1;
 import game.Weapons.EnemyMissile;
 import game.Weapons.Missile;
 
-
+//standard class for enemies
 public abstract class Enemy extends Airplane{
 
-	protected boolean movedX = false;
-	protected boolean visible;
-	
+	//string reference for the explosion animation
 	private String ref = "explode2.gif";
 	
-	protected final int CRAFT_SIZE = 20;
+	private final int CRAFT_SIZE = 20;
 	
-	protected final int ATTACK_DELAY = 200;
+	//default constructor
 	public Enemy()
 	{
 		super();
 	}
 	
+	//constructs an enemy at the specified
+	//x and y coordinates
 	public Enemy(int x, int y)
 	{
 		super(x,y);
 	}
 	
+	//returns the reference of the explosion animation
 	public String getRef(){
 		return ref;
 	}
-	@Override
+	
+	//get the value of the CRAFT_SIZE variable
+	public int getSize(){
+		return CRAFT_SIZE;
+	}
+	
+	//standard attack functions which fire bullets
 	public void fireBlueBullet() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -67,6 +73,7 @@ public abstract class Enemy extends Airplane{
 			a.addRandomItem(this);
 	}
 	
+	//updates the position of the enemy
 	public void move() {
 		
 		int x = (int)getLocation().getX();
@@ -93,19 +100,12 @@ public abstract class Enemy extends Airplane{
 			*/
 	}
 		
-	
-	
-	
-	public void setMoved()
-	{
-		if(movedX == false)
-			movedX = true;
-		else
-			movedX = false;
-	}
-	
+
+	//updates the position of enemy missiles and
+	//handles missiles collisions with the user's craft
 	public void missileAction(Craft a)
 	{
+		//if this plane hasn't exploded then allow it to attack
 		if(isExploded() == false){
 			attack();
 		}
@@ -138,6 +138,7 @@ public abstract class Enemy extends Airplane{
 		
 	}
 
+	//draw a small HP bar right above the enemy
 	public void drawHP(Graphics hp)
 	{
 		int x = (int) getLocation().getX();
@@ -149,6 +150,7 @@ public abstract class Enemy extends Airplane{
 	    hp.fillRect(x+30, y-3, getHP(), 5);
 	}	
 	
+	//allows the enemy to fire one missile at a time
 	public void attack(){
 		ArrayList<Missile> missiles = getMissiles();
 
@@ -156,22 +158,7 @@ public abstract class Enemy extends Airplane{
 		if(x >= 300)
 			if(missiles.size()<1)
 				fireMissle();
-		
-		/*
-		Thread t;
-		
-		t = new Thread(new Runnable(){
-			
-			public void run() {
-				try{
-					while(getMissiles().size() <1)
-						fireMissle();
-				}catch (Exception e){}
-			}
-		});
-		
-		t.start();
-		*/
+
 	}
 	
 

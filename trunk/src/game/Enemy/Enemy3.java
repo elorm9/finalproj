@@ -3,8 +3,10 @@ package game.Enemy;
 public class Enemy3 extends Enemy{
 	private String ref = "Planes/Enemy3.png";
     
+	//used in the move function
+	//helps to determine when to move up or down
 	private boolean moveUp = true;
-	
+	private boolean movedX;
     public Enemy3()
     {
     	super();
@@ -26,6 +28,7 @@ public class Enemy3 extends Enemy{
         setExplosion(getRef());
     }
     
+    //this enemy moves in a zigzag motion
 	public void move() {
 		
 		int x = (int)getLocation().getX();
@@ -48,7 +51,8 @@ public class Enemy3 extends Enemy{
     				moveUp = true;
     		}
 
-	    	if(!movedX)
+	    	
+			if(!movedX)
 	    		if( x <= -40)
 	    			setVisible(false);
     		}

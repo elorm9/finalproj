@@ -22,7 +22,7 @@ private String ref = "EnemyBullets/missileFlipped.png";
     	setWidth(getImage().getWidth(null)-23);
         setHeight(getImage().getHeight(null));
         
-        setSpeed(2);
+        setDX(2);
         setDamage(5);
         
         setVisible(true);
@@ -31,7 +31,7 @@ private String ref = "EnemyBullets/missileFlipped.png";
 
 
     public void move() {
-    	getLocation().translate(-getSpeed(), 0);
+    	getLocation().translate(-getDX(), 0);
         if (getLocation().getX() <= BOARD_WIDTH)
             setVisible(false);
     }

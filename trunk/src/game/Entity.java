@@ -144,19 +144,23 @@ public abstract class Entity {
 	    explosion = ii.getImage();
 	}
 	
+	//get the explosion animation
 	public Image getExplosion(){
 		return explosion;
 	}
 	
+	//set the entity's current image to the explosion animation 
 	public void explode(){
 		image = explosion;
 		isExploded = true;
 	}
 	
+	//return whether or not the entity has exploded
 	public boolean isExploded(){
 		return isExploded;
 	}
 	
+	//get the main image of the entity
 	public Image getImage() {
 		return image;
 	}
