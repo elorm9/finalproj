@@ -29,13 +29,14 @@ public class Enemy5 extends Enemy{
         setExplosion(getRef());
     }
     
+    //this enemy fires 3 bullets at once
 	public void fireRedBullet() {
 		int x = (int)getLocation().getX();
     	int y = (int)getLocation().getY();
     	
-    	getMissiles().add(new EnemyBullet1(x - CRAFT_SIZE, y + CRAFT_SIZE/2 + 20, 6, 1));
-    	getMissiles().add(new EnemyBullet1(x - CRAFT_SIZE, y + CRAFT_SIZE/2 + 20, 4, 1));
-    	getMissiles().add(new EnemyBullet1(x - CRAFT_SIZE, y + CRAFT_SIZE/2 + 20, 2, 1));
+    	getMissiles().add(new EnemyBullet1(x - getSize(), y + getSize()/2 + 20, 6, 1));
+    	getMissiles().add(new EnemyBullet1(x - getSize(), y + getSize()/2 + 20, 4, 1));
+    	getMissiles().add(new EnemyBullet1(x - getSize(), y + getSize()/2 + 20, 2, 1));
 	}
 	
 	public void attack(){
@@ -48,7 +49,5 @@ public class Enemy5 extends Enemy{
 
 	}
     
-
-
 
 }

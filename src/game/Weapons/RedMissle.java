@@ -19,7 +19,7 @@ public class RedMissle extends Missile{
 	    	setWidth(getImage().getWidth(null)-23);
 	        setHeight(getImage().getHeight(null));
 	        
-	        setSpeed(3);
+	        setDX(3);
 	        setDamage(4);
 	        
 	        setVisible(true);

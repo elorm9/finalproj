@@ -7,7 +7,8 @@ public class Enemy4 extends Enemy{
     
 
     private boolean moveDown = true;
-
+    private boolean movedX = true;
+    
     public Enemy4()
     {
     	super();

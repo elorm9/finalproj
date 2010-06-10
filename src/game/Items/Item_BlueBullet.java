@@ -2,6 +2,7 @@ package game.Items;
 
 import game.Craft;
 
+//this item appears as a blue orb, it increases the user's number of blue bullets
 public class Item_BlueBullet extends Items{
 
 	private String ref = "12px-blue-round.png";

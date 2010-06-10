@@ -14,18 +14,22 @@ import java.awt.*;
 
 public abstract class Airplane extends Entity{
 	
+	private int CRAFT_SIZE = 20;
+	
+	//this stores the current HP of the craft
     private int HP;
+    
+    //this stores the maxHP that the craft can have
     private int maxHP;
     
     private String explosionRef = "Images/Planes/explode.gif";
     
+    //this arraylist stores all missiles of each airplane
 	private ArrayList <Missile> missiles = new ArrayList<Missile>();
+
 	
-	private AudioClip laser1;
-	private AudioClip laser2;
-	private AudioClip laser3;
-	private AudioClip explode;
-	
+	//attack commands that will be defined by
+	//each sub-class
     public abstract void fireRedBullet();
     public abstract void fireBlueBullet();
     public abstract void fireMissle();
@@ -46,6 +50,10 @@ public abstract class Airplane extends Entity{
     	return missiles;
     }
     
+    public int getSize(){
+    	return CRAFT_SIZE;
+    }
+    //this function draws all of the missiles in the missile arraylist
 	public void drawMissiles(Graphics2D g2d, ImageObserver j)
 	{
 		int x = 0;
@@ -60,64 +68,42 @@ public abstract class Airplane extends Entity{
 		}
 	}
 	
+	//reduces hp by the specified amount of damage
 	public void takeDamage(int damage)
 	{
 		HP -= damage;
 	}
 	
+	//set the HP
 	public void setHP(int h){
 		HP = h;
 	}
 	
+	//get the HP
 	public int getHP()
 	{
 		return HP;
 	}
 	
+	//set the maximum HP
 	public void setMaxHP(int h){
 		maxHP = h;
 	}
 	
+	//increase the HP
 	public void increaseHP(int h){
 		HP += h;
 		
 		if(HP > maxHP)
 			HP = maxHP;
 	}
-
+	
+	//get the reference to the explosion animation
 	public String getExplosionRef(){
 		return explosionRef;
 	}
 	
-	public void explode(){
-		super.explode();
-	}
-	
-	public void initSounds(){
-		
-		URL url = this.getClass().getResource("Sounds/Laser1.wav");
-		laser1 = Applet.newAudioClip(url);
-		
-		url = this.getClass().getResource("Sounds/Laser2.wav");
-		laser2 = Applet.newAudioClip(url);
-		
-		url = this.getClass().getResource("Sounds/Laser3.wav");
-		laser3 = Applet.newAudioClip(url);
-		
-		url = this.getClass().getResource("Sounds/Explode.aif");
-		explode = Applet.newAudioClip(url);
-	}
-	public AudioClip getL1(){
-		return laser1;
-	}
-	
-	public AudioClip getL2(){
-		return laser2;
-	}
-	
-	public AudioClip getL3(){
-		return laser3;
-	}
+
 
 }
 

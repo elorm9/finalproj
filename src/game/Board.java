@@ -14,7 +14,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.ImageObserver;
 
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -168,6 +167,7 @@ public class Board extends JPanel implements ActionListener{
     public void updateLevel(Graphics2D g2d){
     	
     }
+    
     public void actionPerformed(ActionEvent e) {
         
         //update the airplane's position
@@ -229,6 +229,7 @@ public class Board extends JPanel implements ActionListener{
         }
 
         public void keyPressed(KeyEvent e) {
+        	//invoke the user craft's key listener
             craft.keyPressed(e);
         }
     }

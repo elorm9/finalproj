@@ -2,6 +2,8 @@ package game.Items;
 
 import game.Craft;
 
+//this item appears as a red orb
+//it increases the user's number of missiles
 public class Item_Missile extends Items{
 
 	private String ref = "12px-purple-round.png";
